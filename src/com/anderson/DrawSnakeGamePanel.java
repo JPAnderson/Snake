@@ -129,7 +129,7 @@ public class DrawSnakeGamePanel extends JPanel {
 
 		g.clearRect(0, 0, maxX, maxY);
 
-		g.setColor(Color.LIGHT_GRAY);
+		g.setColor(Color.WHITE);
 
 		//Draw grid - horizontal lines
 		for (int y=0; y <= maxY ; y+= squareSize){
@@ -153,7 +153,7 @@ public class DrawSnakeGamePanel extends JPanel {
 		g.fillRect(x+1, y+1, SnakeGame.squareSize-1, SnakeGame.squareSize-1); //possible TODO magic number
 
 	}
-
+//https://blog.udemy.com/dql-queries/  //TODO check this out for database help. Compliments of Malcom
 	private void displayWalls(Graphics g){
 		g.setColor(Color.BLACK);
 
@@ -169,8 +169,8 @@ public class DrawSnakeGamePanel extends JPanel {
 		int x4 = wall4.getWallX() * SnakeGame.squareSize;
 		int y4 = wall4.getWallY() * SnakeGame.squareSize;
 
-		int x5 = wall2.getWallX() * SnakeGame.squareSize;
-		int y5 = wall3.getWallY() * SnakeGame.squareSize;
+		int x5 = wall5.getWallX() * SnakeGame.squareSize;
+		int y5 = wall5.getWallY() * SnakeGame.squareSize;
 		g.fillRect(x+1, y+1, SnakeGame.squareSize -1, SnakeGame.squareSize -1);
 		g.fillRect(x2+1, y2+1, SnakeGame.squareSize -1, SnakeGame.squareSize -1);
 		g.fillRect(x3+1, y3+1, SnakeGame.squareSize -1, SnakeGame.squareSize -1);
