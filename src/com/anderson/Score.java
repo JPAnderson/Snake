@@ -1,4 +1,4 @@
-package com.clara;
+package com.anderson;
 
 /** Keeps track of, and display the user's score
  * 
@@ -35,7 +35,8 @@ public class Score {
 	//updates high score and returns true if so.
 	
 	public boolean gameOver(){
-		
+
+
 		if (score > highScore) {
 			highScore = score;
 			return true;
@@ -50,18 +51,24 @@ public class Score {
 	}
 
 	public String newHighScore() {
-		
+
+
+
 		if (score > highScore) {
 			highScore = score;
-			return "New High Score!!";
-		} else {
+			return "New High Score!! XD XD";
+		} else{
+
 			return "";
+		}
 	}
-	}
+
 
 	public String getStringHighScore() {
 		return Integer.toString(highScore);
 	}
+
+
 	
 }
 

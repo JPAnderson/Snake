@@ -1,5 +1,6 @@
-package com.clara;
+package com.anderson;
 
+import java.awt.*;
 import java.util.TimerTask;
 
 public class GameClock extends TimerTask {
@@ -30,7 +31,7 @@ public class GameClock extends TimerTask {
 			case SnakeGame.DURING_GAME: {
 				//
 				snake.moveSnake();
-				if (snake.didEatKibble(kibble) == true) {		
+				if (snake.didEatKibble(kibble) == true) {
 					//tell kibble to update
 					kibble.moveKibble(snake);
 					Score.increaseScore();

@@ -1,4 +1,4 @@
-package com.clara;
+package com.anderson;
 
 import java.awt.Point;
 import java.util.LinkedList;
@@ -133,10 +133,12 @@ public class Snake {
 		//Did you hit the wall, snake? 
 		//Or eat your tail? Don't move. 
 
-		if (hitWall == true || ateTail == true) {
+		if ( hitWall == true || ateTail == true) {
 			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
 			return;
 		}
+
+
 
 		//Use snakeSquares array, and current heading, to move snake
 
@@ -176,13 +178,52 @@ public class Snake {
 			snakeHeadX ++ ;
 		}
 
-		//Does this make snake hit the wall?
-		if (snakeHeadX >= maxX || snakeHeadX < 0 || snakeHeadY >= maxY || snakeHeadY < 0 ) {
-			hitWall = true;	
+		//Code for warp walls. Modified original code that caused the game to end when the snake head
+		//hit a wall. When the snake head hits a wall, the snake's head is translated
+		//to the opposite wall, maintaining its direction and elevation.
+		//I.e: if the snake hits the minimum X boundry, snakeHeadX is changed to the
+		//maximum X boundry, but snakeHeadY remains the same. This makes it look like the
+		//snake is warping from one wall to the other, but in actuality the snake's head
+		//is being moved across the grid.
+		if (snakeHeadX < 0 ) {
+			snakeHeadX = maxX - 1;
+		}
+		if(snakeHeadX >= maxX){
+			snakeHeadX = 0;
+		}
+		if(snakeHeadY < 0) {
+			snakeHeadY = maxY - 1;
+		}
+		if(snakeHeadY >= maxY){
+			snakeHeadY = 0;
+		}
+
+
+		if(snakeHeadX == SnakeGame.wall1.getWallX() && snakeHeadY == SnakeGame.wall1.getWallY()){
+			hitWall = true;
 			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
 			return;
 		}
-
+		if(snakeHeadX == SnakeGame.wall2.getWallX() && snakeHeadY == SnakeGame.wall2.getWallY()){
+			hitWall = true;
+			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
+			return;
+		}
+		if(snakeHeadX == SnakeGame.wall3.getWallX() && snakeHeadY == SnakeGame.wall3.getWallY()){
+			hitWall = true;
+			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
+			return;
+		}
+		if(snakeHeadX == SnakeGame.wall4.getWallX() && snakeHeadY == SnakeGame.wall4.getWallY()){
+			hitWall = true;
+			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
+			return;
+		}
+		if(snakeHeadX == SnakeGame.wall5.getWallX() && snakeHeadY == SnakeGame.wall5.getWallY()){
+			hitWall = true;
+			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
+			return;
+		}
 		//Does this make the snake eat its tail?
 
 		if (snakeSquares[snakeHeadX][snakeHeadY] != 0) {
@@ -218,10 +259,10 @@ public class Snake {
 
 	}
 
-	protected boolean didHitWall(){
-		return hitWall;
-
-	}
+//	protected boolean didHitWall(){
+//		return hitWall;
+//
+//	}
 
 	protected boolean didEatTail(){
 		return ateTail;
@@ -282,7 +323,7 @@ public class Snake {
 	}
 
 	public boolean isGameOver() {
-		if (hitWall == true || ateTail == true){
+		if ( ateTail == true){
 			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
 			return true;
 			

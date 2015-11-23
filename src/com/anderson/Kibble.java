@@ -1,4 +1,4 @@
-package com.clara;
+package com.anderson;
 
 import java.util.Random;
 
