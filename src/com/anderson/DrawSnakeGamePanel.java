@@ -150,13 +150,16 @@ public class DrawSnakeGamePanel extends JPanel {
 		int x = kibble.getKibbleX() * SnakeGame.squareSize;
 		int y = kibble.getKibbleY() * SnakeGame.squareSize;
 
-		g.fillRect(x+1, y+1, SnakeGame.squareSize-1, SnakeGame.squareSize-1); //possible TODO magic number
+		g.fillRect(x, y, SnakeGame.squareSize, SnakeGame.squareSize);
+		//Removed (magic?)numbers here that originally increased padding to accommodate for the border.
+		//With the grid removed, it an be drawn fine with no modification
+		//Original code >> g.fillRect(x+1, y+1, SnakeGame.squareSize-1, SnakeGame.squareSize-1);
 
 	}
-//https://blog.udemy.com/dql-queries/  //TODO check this out for database help. Compliments of Malcom
-	private void displayWalls(Graphics g){
-		g.setColor(Color.BLACK);
-
+	//https://blog.udemy.com/dql-queries/
+	private void displayWalls(Graphics g){ //Method for displaying the wall objects.
+		g.setColor(Color.BLACK);		   //If it looks familiar it's because it's code was heavily
+		//influenced from the displayKibble method that Clara wrote.
 		int x = wall1.getWallX() * SnakeGame.squareSize;
 		int y = wall1.getWallY() * SnakeGame.squareSize;
 
@@ -171,11 +174,11 @@ public class DrawSnakeGamePanel extends JPanel {
 
 		int x5 = wall5.getWallX() * SnakeGame.squareSize;
 		int y5 = wall5.getWallY() * SnakeGame.squareSize;
-		g.fillRect(x+1, y+1, SnakeGame.squareSize -1, SnakeGame.squareSize -1);
-		g.fillRect(x2+1, y2+1, SnakeGame.squareSize -1, SnakeGame.squareSize -1);
-		g.fillRect(x3+1, y3+1, SnakeGame.squareSize -1, SnakeGame.squareSize -1);
-		g.fillRect(x4+1, y4+1, SnakeGame.squareSize -1, SnakeGame.squareSize -1);
-		g.fillRect(x5+1, y5+1, SnakeGame.squareSize -1, SnakeGame.squareSize -1);
+		g.fillRect(x, y, SnakeGame.squareSize , SnakeGame.squareSize);
+		g.fillRect(x2, y2, SnakeGame.squareSize , SnakeGame.squareSize);
+		g.fillRect(x3, y3, SnakeGame.squareSize, SnakeGame.squareSize);
+		g.fillRect(x4, y4, SnakeGame.squareSize, SnakeGame.squareSize);
+		g.fillRect(x5, y5, SnakeGame.squareSize, SnakeGame.squareSize);
 	}
 
 	private void displaySnake(Graphics g) {
@@ -183,11 +186,13 @@ public class DrawSnakeGamePanel extends JPanel {
 		LinkedList<Point> coordinates = snake.segmentsToDraw();
 
 		//Draw head in grey
-		g.setColor(Color.BLACK);
+		g.setColor(Color.BLACK); //Changed snake head to be drawn in black to enhance minimalist look.
+		//As the snake is always moving forward, it should be relatively
+		//intuitive to see where the head is.
 		Point head = coordinates.pop();
 		g.fillRect((int)head.getX(), (int)head.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
 
-		//Draw rest of snake in black
+
 		g.setColor(Color.BLACK);
 		for (Point p : coordinates) {
 			g.fillRect((int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
@@ -196,24 +201,12 @@ public class DrawSnakeGamePanel extends JPanel {
 	}
 
 	public void displayInstructions(Graphics g) {
-		JPanel startPanel = new JPanel();
-		SnakeGame.snakeFrame.add(startPanel);
-		JButton startGame = new JButton("Start");
-		JButton exitGame = new JButton("Exit");
-		JButton easy = new JButton("Easy");
-		JButton medium = new JButton("Medium");
-		JButton hard = new JButton("Hard");
-
-		startGame.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SnakeGame.setGameStage(SnakeGame.DURING_GAME);
-
-			}
-		});
-		startPanel.add(startGame);
-		startPanel.add(exitGame);
-		startPanel.add(easy);
+		//Slightly freshened the look of the intro page.
+		g.drawRect(128, 100, 250,150);  //decorative rectangles
+		g.drawRect(122, 95, 260, 162);
+		g.drawString("Welcome to Snake", 200, 130); //Centered instructions
+		g.drawString("Press any key to start", 195, 150);
+		g.drawString("Press 'q' to quit", 210, 170);
 
 
 

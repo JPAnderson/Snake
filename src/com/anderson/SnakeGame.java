@@ -8,8 +8,8 @@ import javax.swing.*;
 
 public class SnakeGame {
 
-	public final static int xPixelMaxDimension = 501;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
-	public final static int yPixelMaxDimension = 501;
+	public final static int xPixelMaxDimension = 500;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
+	public final static int yPixelMaxDimension = 500;
 
 	public static int xSquares ;
 	public static int ySquares ;
@@ -22,10 +22,10 @@ public class SnakeGame {
 
 	protected static Score score;
 
-	public static Walls wall1;
-	public static Walls wall2;
+	public static Walls wall1; //Each of these will be used to create
+	public static Walls wall2; //wall objects when the game is initialized.
 	public static Walls wall3;
-	public static Walls wall4;
+	public static Walls wall4; //See Wall class for more info.
 	public static Walls wall5;
 
 	static final int BEFORE_GAME = 1;
@@ -33,31 +33,15 @@ public class SnakeGame {
 	static final int GAME_OVER = 3;
 	static final int GAME_WON = 4;   //The values are not important. The important thing is to use the constants
 
-	public static void setSlow(boolean slow) {
-		SnakeGame.slow = slow;
-	}
-
-	public static void setMedium(boolean medium) {
-		SnakeGame.medium = medium;
-	}
-
-	public static void setFast(boolean fast) {
-		SnakeGame.fast = fast;
-	}
-
 	//instead of the values so you trare clear what you are setting. Easy to forget what number is Game over vs. game won
-	//Using constant names instead makes it easier to keep it straight. Refer to these variables 
+	//Using constant names instead makes it easier to keep it straight. Refer to these variables
 	//using statements such as SnakeGame.GAME_OVER
-	static boolean slow = false;
-	static boolean medium = false;
-	static boolean fast = false;
 
-	private static int gameStage = BEFORE_GAME;  //use this to figure out what should be happening. 
+
+	private static int gameStage = BEFORE_GAME;  //use this to figure out what should be happening.
 	//Other classes like Snake and DrawSnakeGamePanel will need to query this, and change its value
 
 	protected static long clockInterval = 100; //controls game speed1
-	protected static long clockInterval2 = 250;
-	protected static long clockInterval3 = 500;
 	//Every time the clock ticks, the snake moves
 	//This is the time between clock ticks, in milliseconds
 	//1000 milliseconds = 1 second.
@@ -78,7 +62,7 @@ public class SnakeGame {
 		snakeFrame.setVisible(true);
 		snakeFrame.setResizable(true);
 
-		snakePanel = new DrawSnakeGamePanel(snake, kibble, score, wall1, wall2, wall3, wall4, wall5);
+		snakePanel = new DrawSnakeGamePanel(snake, kibble, score, wall1, wall2, wall3, wall4, wall5); //Snake panel instantiates wil 5 walls now.
 		snakePanel.setFocusable(true);
 		snakePanel.requestFocusInWindow(); //required to give this component the focus so it can generate KeyEvents
 
@@ -100,7 +84,7 @@ public class SnakeGame {
 		snake = new Snake(xSquares, ySquares, squareSize);
 		kibble = new Kibble(snake);
 		score = new Score();
-		wall1 = new Walls(snake);
+		wall1 = new Walls(snake);  //Added wall objects to be initialized when the game starts
 		wall2 = new Walls(snake);
 		wall3 = new Walls(snake);
 		wall4 = new Walls(snake);
@@ -112,16 +96,8 @@ public class SnakeGame {
 	protected static void newGame() {
 		Timer timer = new Timer();
 		GameClock clockTick = new GameClock(snake, kibble, score, snakePanel);
-//		if(slow){
-			timer.scheduleAtFixedRate(clockTick, 0 , clockInterval);
-//		}
-//		else if(medium){
-//			timer.scheduleAtFixedRate(clockTick, 0, clockInterval2);
-//		}
-//		else if(fast){
-//			timer.scheduleAtFixedRate(clockTick, 0, clockInterval3);
-//		}
 
+		timer.scheduleAtFixedRate(clockTick, 0 , clockInterval);
 	}
 
 	public static void main(String[] args){
